@@ -24,23 +24,23 @@
 * [scran](http://bioconductor.org/packages/release/bioc/html/scran.html)
 * [DESeq](http://bioconductor.org/packages/release/bioc/html/DESeq.html)
 
-#### Installing ASCEND
+#### Installing ascend
 As this package is still under development, please use devtools to load the package.
 
 ```{r}
-devtools::load_all("ASCEND/")
+devtools::load_all("ascend/")
 ```
 
 You can also use devtools' install_github function to install the package. You can then load the package as normal.
 
 ```{r}
-devtools::install_github("IMB-Computational-Genomics-Lab/ASCEND")
-library(ASCEND)
+devtools::install_github("IMB-Computational-Genomics-Lab/ascend")
+library(ascend)
 ```
 
 ### Getting started
 #### System Requirements
-The amount of computational power and time required to process and analyse a single-cell RNASeq dataset is dependant on its size. Generally, ASCEND can comfortably analyse datasets that consist of up to 10,000 cells on a single machine. A single machine is defined as a desktop or laptop with 8GB of memory and four CPUs.
+The amount of computational power and time required to process and analyse a single-cell RNASeq dataset is dependant on its size. Generally, ascend can comfortably analyse datasets that consist of up to 10,000 cells on a single machine. A single machine is defined as a desktop or laptop with 8GB of memory and four CPUs.
 
 #### Configuring BiocParallel
 This package makes extensive use of [BiocParallel](http://bioconductor.org/packages/release/bioc/html/BiocParallel.html) for its functions. Before you begin, you should register a BiocParallel backend in order to get the best performance out of this package.
@@ -69,7 +69,7 @@ The main source of input is an expression matrix, or a gene-barcode matrix conta
 
 In an expression matrix, each row represents a gene and each column represents a cell. The names of rows and columns will subsequently be named accordingly.
 
-ASCEND is able to use any row and column names in the expression matrix, provided they abide by the following criteria:
+ascend is able to use any row and column names in the expression matrix, provided they abide by the following criteria:
 
 1. Names should not repeat. If you have a list with repeats, you can make the names unique by using R's 'make.unique' function.
 2. You should be able to identify which genes you would like to select as controls. This is why gene symbols or ENSEMBL transcript IDs should be used.
@@ -79,7 +79,7 @@ ASCEND is able to use any row and column names in the expression matrix, provide
 You can concatenate multiple expression matrices with the function *JoinMatrices*. Expression matrices generated with this method should then be normalised with the *NormaliseBatches* function. For pipelines such as Chromium's Cell Ranger, the native aggregation function should be used as it takes into account additional information such as individual reads.
 
 #### Cell Information
-Cell Information is a data frame containing cell identifiers, their associated batch identifier and additional information. ASCEND will automatically generate batch information for an expression matrix if none are provided. However, it will make the assumption that there is only one batch of cells in the expression matrix.
+Cell Information is a data frame containing cell identifiers, their associated batch identifier and additional information. ascend will automatically generate batch information for an expression matrix if none are provided. However, it will make the assumption that there is only one batch of cells in the expression matrix.
 
 The Cell Information data frame should be structured as follows:
 
@@ -101,7 +101,7 @@ The Gene Information data frame should be structured as follows:
 | GENE2            | ... | ... |
 
 #### Controls
-You must provide a list of gene identifiers linked to controls, if you would like to use ASCEND's filtering functions. These are generally mitochondrial and ribosomal genes. Spike-ins are also used as controls if they were included in the study.
+You must provide a list of gene identifiers linked to controls, if you would like to use ascend's filtering functions. These are generally mitochondrial and ribosomal genes. Spike-ins are also used as controls if they were included in the study.
 
 Controls should be organised into a named list, and identifiers used should be present in the expression matrix.
 
